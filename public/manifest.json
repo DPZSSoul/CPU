@@ -1,0 +1,16 @@
+{
+  "name": "PC Learning Platform",
+  "short_name": "PC Learn",
+  "description": "Learn how to build your first PC - parts, troubleshooting, and more",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#E65100",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles - polished look */
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply text-slate-800 antialiased;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-pc-accent;
+  }
+}
+
+/* Dark mode */
+html.dark body {
+  @apply text-slate-100;
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  background-attachment: fixed;
+}
+
+/* Touch-friendly */
+@layer utilities {
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Safe area */
+@supports (padding: max(0px)) {
+  .safe-area-padding {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Print - clean cheat sheets and certificate */
+@media print {
+  body {
+    background: white !important;
+    color: #1e293b !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print\:hidden { display: none !important; }
+  .print\:block { display: block !important; }
+  header, footer, nav, .no-print, [class*="fixed"], button.no-print { display: none !important; }
+  main { padding: 0 !important; }
+  a { color: inherit !important; text-decoration: none !important; }
+}

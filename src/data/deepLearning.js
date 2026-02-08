@@ -1,0 +1,365 @@
+/**
+ * Deep learning content for each PC part
+ * Each part has sections: scroll to read, click "Learn more" for deeper detail
+ */
+
+export const DEEP_PARTS = {
+  cpu: {
+    id: 'cpu',
+    name: 'CPU',
+    subtitle: 'Central Processing Unit',
+    description: 'The CPU is the brain of your computer,a small chip that runs programs, makes calculations, and coordinates every other part. Every click, keystroke, and frame in a game goes through it. Understanding how it works helps you pick the right one and troubleshoot when things go wrong.',
+    sections: [
+      {
+        id: 'overview',
+        title: 'What It Is & How It Works',
+        content: 'The CPU is a microprocessor,a tiny chip with billions of transistors. It executes instructions from software in a loop: fetch an instruction from RAM, decode what it means, execute it, then repeat. The speed of this loop (clock speed) and how many instructions it can work on at once (cores and threads) determine how fast your PC feels. The CPU sits in a socket on the motherboard and gets power from the PSU. It talks to RAM for data, to the GPU for graphics work, and to storage when loading programs.',
+        learnMore: 'CPUs use different architectures (x86-64 for desktop). AMD and Intel both make x86 CPUs. The "socket" is the physical interface, AMD AM4, AM5; Intel LGA1700, LGA1851. The socket must match your motherboard. Many CPUs have integrated graphics (iGPU) built in, so you can use the PC without a separate GPU for basic tasks.',
+        analogy: 'Think of the CPU as the brain of an office: it reads memos (instructions from RAM), makes decisions, and tells other departments (GPU, storage) what to do.',
+      },
+      {
+        id: 'cores',
+        title: 'Cores',
+        content: 'A core is an independent processing unit inside the CPU. Think of each core as a separate worker that can run its own set of instructions. A 6-core CPU has 6 workers; an 8-core has 8. More cores mean the CPU can handle more tasks at the same time, like running a game while streaming, or encoding video while browsing. Games often use 4–8 cores. Video editing, streaming, and multitasking benefit from more cores (8–16). Some tasks only use one core; for those, single-core speed matters more than core count.',
+        learnMore: 'Each core has its own arithmetic logic unit (ALU), registers, and L1 cache. Cores share L2 and L3 cache. "Performance" vs "efficiency" cores: Intel\'s hybrid design (P-cores and E-cores) uses big cores for heavy work and small cores for background tasks to save power. AMD uses one type of core. More cores don\'t always mean faster, a faster 6-core can beat a slower 8-core in games that don\'t scale well.',
+        analogy: 'Like workers at a desk: 6 cores = 6 people. They can each work on different tasks at once.',
+      },
+      {
+        id: 'threads',
+        title: 'Threads',
+        content: 'Threads let one core handle two tasks at once. Intel calls this Hyper-Threading; AMD calls it SMT (Simultaneous Multi-Threading). A 6-core, 12-thread CPU can juggle 12 tasks. Not every workload benefits equally, sometimes you get a big boost, sometimes barely any. Thread count is often 2× core count on modern CPUs. For gaming, 12+ threads is usually plenty; for rendering and streaming, more helps.',
+        learnMore: 'Threads work by splitting a core\'s resources. When one thread waits (e.g., for data from RAM), the core can switch to the other thread. This reduces idle time. Some tasks (like pure number crunching) don\'t benefit much. Others (compilation, video encoding, many browser tabs) scale well with threads.',
+      },
+      {
+        id: 'clock-speed',
+        title: 'Clock Speed (GHz)',
+        content: 'Clock speed is how many cycles per second each core runs. 3.5 GHz = 3.5 billion cycles per second. Higher GHz generally means faster, but you can\'t compare GHz across different brands or generations,a 4 GHz AMD and 4 GHz Intel aren\'t the same. Base clock is the normal speed; boost clock kicks in when there\'s thermal headroom (e.g., 3.5 GHz base, 4.4 GHz boost). For real performance, look at benchmarks, not just specs.',
+        learnMore: 'Overclocking raises the clock speed beyond stock. It requires a compatible motherboard (Z-series for Intel, X-series for AMD), good cooling, and some knowledge. Undervolting lowers voltage to reduce heat and power, often possible without losing performance. Modern CPUs manage their own boost; manual overclocking is less necessary than it used to be.',
+      },
+      {
+        id: 'cache',
+        title: 'Cache',
+        content: 'Cache is super-fast memory built into the CPU. It holds data the CPU needs often so it doesn\'t have to wait for slower RAM. L1 is fastest and smallest (per core). L2 is bigger. L3 is shared across cores. When the CPU needs data, it checks L1 → L2 → L3 → RAM. Each step is slower. More cache usually means better performance, especially in games. AMD Ryzen often has more L3 cache than comparable Intel chips.',
+        learnMore: 'Cache uses SRAM (static RAM), which is faster but more expensive than the DRAM used for system RAM. Cache is measured in MB (e.g., 32MB L3). AMD\'s 3D V-Cache (as in the 5800X3D, 7800X3D) adds extra L3 cache on top, huge for games. The CPU predictively loads data into cache (prefetching) to reduce stalls.',
+      },
+      {
+        id: 'communication',
+        title: 'How It Communicates With Other Parts',
+        content: 'The CPU talks to the motherboard via the socket and chipset,sending and receiving data, getting power. It reads instructions and data from RAM; slow RAM means the CPU waits. It sends rendering requests to the GPU,in games, the CPU prepares each frame and the GPU draws it. It doesn\'t talk to storage directly during normal use; programs are loaded from storage into RAM first, then the CPU uses RAM.',
+        learnMore: 'The memory controller is often inside the CPU (AMD, Intel). PCIe lanes from the CPU go to the GPU and sometimes NVMe. The chipset adds more PCIe, USB, and SATA. Data moves over buses,paths with limited bandwidth. A bottleneck is when one part keeps others waiting.',
+      },
+      {
+        id: 'problems',
+        title: 'Common Problems',
+        content: 'Overheating: bad cooler, dried thermal paste, or poor airflow. Fix: repaste, improve cooling. Incompatible socket: CPU and motherboard don\'t match (e.g., AM5 vs LGA1700). Fix: match socket before buying. Bent pins: mishandling during install. Pins are on the CPU (AMD) or socket (Intel). Fix: careful alignment; replace if damaged. Thermal throttling: CPU slows itself when too hot. Fix: improve cooling.',
+        learnMore: 'ESD (static) can kill a CPU. Ground yourself before handling. Thermal paste fills microscopic gaps between CPU and cooler, pea sized is enough. Remove plastic from the cooler cold plate before installing. If the PC won\'t POST after a CPU upgrade, the BIOS may need an update for the new CPU.',
+      },
+      {
+        id: 'symptoms',
+        title: 'Symptoms When It Fails',
+        content: 'PC won\'t POST at all (dead CPU). Random crashes or freezes. Blue screens (BSOD). Extreme slowness (thermal throttling). No boot,fans spin, no display. A faulty CPU can mimic GPU or RAM issues, so isolate systematically.',
+        learnMore: 'CPU failures are rare. More often "no display" is wrong port, RAM, or GPU. If you suspect CPU: try known-good RAM, reseat everything, check cooler mounting. Bent pins can cause no POST or weird behavior.',
+      },
+      {
+        id: 'mistakes',
+        title: 'Beginner Mistakes',
+        content: 'Assuming more cores always means faster, single thread matters for many games. Forgetting thermal paste or leaving plastic on the cooler. Forcing the CPU into the socket when pins don\'t align. Assuming "no display" means dead GPU, the CPU can cause it too.',
+        learnMore: 'Always check the compatibility list before buying. Some motherboards need a BIOS update for newer CPUs. Don\'t overtighten the cooler, follow the manual. AMD CPUs have pins on the chip; Intel has pins in the socket. Handle both carefully.',
+        mistakeWarning: '⚠️ Never force the CPU into the socket. If it doesn\'t drop in easily, something is wrong, check alignment. Forgetting to remove the plastic from the cooler is one of the most common first-build mistakes.',
+      },
+    ],
+    commonProblems: [
+      { issue: 'Overheating', fix: 'Repaste, improve cooling' },
+      { issue: 'Incompatible socket', fix: 'Match socket before purchase' },
+      { issue: 'Bent pins', fix: 'Careful alignment; replace if damaged' },
+      { issue: 'Thermal throttling', fix: 'Improve cooling' },
+    ],
+    symptomsWhenFails: ['PC won\'t POST', 'Random crashes', 'Blue screens', 'Extreme slowness', 'No boot'],
+    beginnerMistakes: ['More cores ≠ always faster', 'Forgetting thermal paste or cooler plastic', 'Forcing CPU into socket', 'Assuming no display = dead GPU'],
+  },
+  motherboard: {
+    id: 'motherboard',
+    name: 'Motherboard',
+    subtitle: 'Mainboard / MOBO',
+    description: 'The motherboard is the main circuit board that everything plugs into. It has slots for the CPU, RAM, and GPU, plus connectors for storage, fans, and power. It also holds the BIOS (or UEFI), which runs when you first turn on your PC.',
+    sections: [
+      {
+        id: 'overview',
+        title: 'What It Is & How It Works',
+        content: 'The motherboard is a PCB (printed circuit board) with traces that carry data and power. It has a socket for the CPU, DIMM slots for RAM, PCIe slots for the GPU and other cards, M.2 and SATA ports for storage, and headers for fans and the front panel. The chipset (B650, Z790, etc.) extends connectivity and must match your CPU socket. The BIOS/UEFI firmware runs at boot and lets you configure hardware.',
+        learnMore: 'Form factors: ATX (standard), Micro ATX (smaller), Mini-ITX (compact). The case must fit your board size. The chipset determines features, USB ports, PCIe lanes, overclocking support. Budget boards use B-series (AMD) or B/H (Intel); enthusiast boards use X (AMD) or Z (Intel).',
+      },
+      {
+        id: 'chipset',
+        title: 'Chipset',
+        content: 'The chipset is a secondary chip that controls what your board can do, USB ports, extra PCIe lanes, SATA, and overclocking. Names like B550, B650, Z790 identify the chipset. It must match your CPU socket: AM4 boards use B450/B550/X570; AM5 uses B650/X670; LGA1700 uses B660/B760/Z790. Budget chipsets (B-series) have fewer features; enthusiast chipsets (X, Z) add more.',
+        learnMore: 'The chipset doesn\'t handle CPU RAM or CPU GPU, those go directly to the CPU. It adds extra PCIe for multiple M.2 drives, USB, SATA. Some features (like PCIe 5.0) require a matching CPU and chipset.',
+      },
+      {
+        id: 'bios',
+        title: 'BIOS / UEFI',
+        content: 'BIOS (Basic Input/Output System) or UEFI is the firmware that runs when you power on. It initializes hardware, checks for bootable drives, and loads the OS. You enter it by pressing Del or F2 at boot. From here you set boot order, enable XMP for RAM speed, update the board, and configure fan curves. UEFI replaced the old BIOS,it supports larger drives, faster boot, and a graphical interface.',
+        learnMore: 'BIOS updates can add CPU support, fix bugs, improve stability. Update via a USB stick,check your board\'s manual. BIOS flashback lets some boards update without a CPU. Never power off during an update,you can brick the board.',
+      },
+      {
+        id: 'communication',
+        title: 'How It Communicates',
+        content: 'The CPU connects via the socket. RAM connects via DIMM slots (memory controller is often in the CPU). The GPU plugs into the PCIe x16 slot. Storage uses M.2 (NVMe) or SATA ports. The 24-pin connector and 8-pin CPU power come from the PSU. Front panel wires (power button, LEDs, USB) go to headers on the board.',
+        learnMore: 'PCIe lanes come from the CPU (primary GPU, sometimes M.2) and chipset (extra slots and ports). Each lane is a data path. x16 means 16 lanes,full bandwidth for a GPU.',
+      },
+      {
+        id: 'problems',
+        title: 'Common Problems',
+        content: 'Dead board: ESD, power surge, or age. Fix: test with minimal parts; replace if no POST. RAM slots fail: dust, bent pins, slot damage. Fix: try different slots; reseat RAM. BIOS won\'t boot: corrupt BIOS, wrong boot order. Fix: reset CMOS; check boot order. Mounting without standoffs shorts the board to the case,can fry it.',
+        learnMore: 'Standoffs are screws that raise the board off the case metal. The case usually includes them. Never mount the board directly to the case. Forgetting the 8-pin CPU power is a common cause of no POST.',
+        mistakeWarning: '⚠️ Never mount the motherboard directly to the case metal. Use standoffs, mounting without them can short-circuit and fry the board.',
+      },
+    ],
+    commonProblems: [
+      { issue: 'Dead board', fix: 'Test with minimal parts; replace if no POST' },
+      { issue: 'RAM slots fail', fix: 'Try different slots; reseat RAM' },
+      { issue: 'BIOS won\'t boot', fix: 'Reset CMOS; check boot order' },
+    ],
+    symptomsWhenFails: ['No POST', 'Intermittent boots', 'RAM not detected', 'PCIe not recognized'],
+    beginnerMistakes: ['Mounting without standoffs', 'Forgetting 8-pin CPU power', 'Assuming all boards support all CPUs'],
+  },
+  ram: {
+    id: 'ram',
+    name: 'RAM',
+    subtitle: 'Random Access Memory',
+    description: 'RAM is your computer\'s short-term memory. It holds data and programs the CPU is actively using. When you open a program, it loads into RAM so the CPU can access it quickly. RAM is fast but temporary, when you shut down, it\'s cleared.',
+    sections: [
+      {
+        id: 'overview',
+        title: 'What It Is & How It Works',
+        content: 'RAM (Random Access Memory) is volatile memory, it loses data when power is off. The CPU reads instructions and data from RAM; when RAM is full, the system uses a page file on storage (much slower). More RAM lets you run more programs at once. Speed (MHz) and how you install it (dual channel) affect performance. DDR4 and DDR5 are the current types; you can\'t mix them, the physical slot is different.',
+        learnMore: 'RAM uses DRAM (dynamic RAM),it needs to be refreshed constantly. Speed is in MHz (e.g., 3200); latency is in CL (e.g., CL16). Lower CL with same MHz = slightly faster. Real latency formula: (CL / MHz) × 2000 ns.',
+        analogy: 'Think of RAM like your desk: bigger desk = more papers (programs) you can have open at once. When the desk is full, you have to swap papers to a filing cabinet (storage),much slower.',
+      },
+      {
+        id: 'ddr4-ddr5',
+        title: 'DDR4 vs DDR5',
+        content: 'DDR5 is newer and faster. It runs at higher speeds (4800 MHz and up) and uses less power. DDR4 works with older boards and is still common. The physical slot is different,DDR4 won\'t fit in a DDR5 slot and vice versa. New builds usually pick DDR5 when the motherboard supports it. Check your board\'s specs.',
+        learnMore: 'DDR5 has on-die ECC (error correction) and often runs at 1.1V vs DDR4\'s 1.2V. DDR4 tops out around 3600–4000 MHz for most kits. AM5 and newer Intel platforms use DDR5; AM4 and older Intel use DDR4.',
+      },
+      {
+        id: 'dual channel',
+        title: 'Dual Channel',
+        content: 'Using two sticks in the correct slots doubles the bandwidth between RAM and CPU. One stick runs in single channel,half the speed. Check your motherboard manual for which slots to use,often slots 2 and 4, or 1 and 3. Four sticks can run dual channel on most boards (two channels, two sticks per channel).',
+        learnMore: 'Wrong slot population can drop to single channel. Some boards support quad-channel (threadripper, Xeon) but most consumer boards are dual channel. Mixing RAM from different kits can cause instability, use a matched kit when possible.',
+      },
+      {
+        id: 'speed-latency',
+        title: 'Speed (MHz) & Latency (CL)',
+        content: 'Higher MHz = faster data transfer. Lower CL (Cas Latency) = less delay per access. 3200 MHz CL16 is a common sweet spot for DDR4. For DDR5, 5600 or 6000 MHz is typical. Real world differences are often subtle,don\'t obsess over small gains. 16GB at 3200+ or 32GB at 3000+ is usually plenty for gaming.',
+        learnMore: 'XMP (Intel) and EXPO (AMD) are profiles that run RAM at advertised speed. Without enabling them in BIOS, RAM runs at default (often 2133 or 4800). XMP can be unstable on some boards,try one step lower if you have issues.',
+      },
+      {
+        id: 'problems',
+        title: 'Common Problems',
+        content: 'Wrong type: motherboard supports DDR4 or DDR5, not both. Fix: match RAM type. Not seated: incomplete click. Fix: push until clips snap. Bad stick: defective RAM. Fix: test one stick at a time. Mixing kits: different timings cause instability. Fix: use matched kit or disable XMP.',
+        learnMore: 'MemTest86 can test RAM. Run it overnight. If errors appear, try one stick at a time to find the bad one. Reseating often fixes "no POST" after moving the PC.',
+      },
+    ],
+    commonProblems: [
+      { issue: 'Wrong type (DDR4 vs DDR5)', fix: 'Match RAM type to board' },
+      { issue: 'Not seated properly', fix: 'Push until clips snap' },
+      { issue: 'Bad stick', fix: 'Test one stick at a time' },
+    ],
+    symptomsWhenFails: ['No POST', 'Blue screens', 'Random crashes', 'XMP won\'t work'],
+    beginnerMistakes: ['Mixing RAM kits', 'Wrong slots for dual channel', 'Assuming 32GB always better'],
+  },
+  gpu: {
+    id: 'gpu',
+    name: 'GPU',
+    subtitle: 'Graphics Processing Unit',
+    description: 'The GPU draws everything you see on screen. It has thousands of small cores that work in parallel,perfect for rendering millions of pixels. It has its own memory (VRAM). Gaming and creative work need a dedicated GPU.',
+    sections: [
+      {
+        id: 'overview',
+        title: 'What It Is & How It Works',
+        content: 'The GPU is a parallel processor optimized for graphics. Unlike the CPU (great at one thing at a time), the GPU has thousands of cores that work simultaneously. It plugs into the PCIe x16 slot and gets power from the PSU. It receives draw calls from the CPU, loads textures from VRAM, runs shaders, and outputs frames to your monitor. Higher resolution and quality settings = more work.',
+        learnMore: 'Discrete GPUs are separate cards. Integrated GPUs (iGPU) are built into some CPUs,fine for desktop use, not for gaming. Laptop GPUs are often soldered. External GPUs exist but have bandwidth limits.',
+      },
+      {
+        id: 'vram',
+        title: 'VRAM',
+        content: 'VRAM (Video RAM) is the GPU\'s own memory. It stores textures, 3D models, frame buffers, and everything needed to render a frame. 8GB is common for 1080p; 12GB+ for 1440p and 4K. Running out causes stuttering or crashes. It\'s separate from system RAM. GDDR6 is common; GDDR6X is faster.',
+        learnMore: 'When VRAM is full, the GPU may use system RAM, much slower. Ray tracing and high-res textures use more VRAM. Modded games with HD textures can need 12–16GB. Integrated GPUs borrow system RAM instead of having dedicated VRAM.',
+      },
+      {
+        id: 'cuda-stream',
+        title: 'Cores: CUDA & Stream Processors',
+        content: 'NVIDIA uses CUDA cores; AMD uses Stream Processors. They\'re tiny cores that work in parallel. More isn\'t always better,architecture matters. Tensor cores (NVIDIA) speed up AI and DLSS. Games use shader cores for lighting and effects. Compare real benchmarks, not core counts.',
+        learnMore: 'Different GPU architectures have different efficiency. A newer GPU with fewer cores can beat an older one with more. Ray tracing uses dedicated RT cores on NVIDIA and AMD RDNA 2/3.',
+      },
+      {
+        id: 'communication',
+        title: 'How It Communicates',
+        content: 'The GPU connects to the motherboard via PCIe (16 lanes typically). It gets power from 6+2 pin or 8-pin cables from the PSU. It receives draw calls and data from the CPU and sends completed frames to the display. High-end GPUs need 2–3 power connectors.',
+        learnMore: 'PCIe 4.0 x16 is plenty for current GPUs. PCIe 5.0 is newer. Make sure your PSU has enough wattage and the right cables. Never daisy chain one cable for a high power GPU, use separate cables.',
+      },
+      {
+        id: 'problems',
+        title: 'Common Problems',
+        content: 'No display: cable in wrong port (motherboard instead of GPU), GPU not seated, or driver issue. Fix: plug into GPU; reseat; update drivers. Artifacts/crashes: overheating, failing VRAM, or power issues. Fix: improve cooling; check PSU. Not detected: not seated, wrong slot, disabled in BIOS. Fix: reseat; try different slot; check BIOS.',
+        learnMore: 'Most "no display" cases are monitor plugged into motherboard when using a dedicated GPU. The motherboard ports are often disabled when a GPU is present. Always plug into the GPU.',
+        mistakeWarning: '⚠️ Using a dedicated GPU? Plug your monitor into the GPU ports (usually lower on the back), NOT the motherboard. This is the #1 cause of "no display."',
+      },
+    ],
+    commonProblems: [
+      { issue: 'No display', fix: 'Plug into GPU; reseat; update drivers' },
+      { issue: 'Artifacts / crashes', fix: 'Improve cooling; check PSU' },
+      { issue: 'Not detected', fix: 'Reseat; try different slot; check BIOS' },
+    ],
+    symptomsWhenFails: ['Black screen', 'Artifacts', 'Driver crashes', 'System crash under load'],
+    beginnerMistakes: ['Monitor in motherboard port', 'Assuming black screen = dead GPU', 'Insufficient PSU'],
+  },
+  vram: {
+    id: 'vram',
+    name: 'VRAM',
+    subtitle: 'Video RAM , GPU Memory',
+    description: 'VRAM is the GPU\'s own memory. It stores textures, 3D models, and frame buffers. It\'s separate from system RAM and lives on the graphics card.',
+    sections: [
+      {
+        id: 'overview',
+        title: 'What It Is & How It Works',
+        content: 'VRAM gives the GPU fast access to everything it needs to draw a frame. The GPU reads textures and writes the frame buffer here. More VRAM means higher resolution and fancier graphics without stuttering. Capacity (8GB, 12GB) and bandwidth (GB/s) both matter. Running out causes stutters or crashes.',
+        learnMore: 'GDDR is designed for high bandwidth. Different from system DDR4/DDR5. Frame buffer stores the image before it\'s sent to the display. Anti-aliasing and high resolutions use more VRAM.',
+      },
+      {
+        id: 'gddr',
+        title: 'GDDR6 vs GDDR6X',
+        content: 'GDDR6 is standard on most cards. GDDR6X is faster and used on high-end NVIDIA cards. Both are much faster than system DDR RAM. Capacity and bandwidth matter, a 12GB card with high bandwidth can beat a 16GB card with lower bandwidth in some cases.',
+        learnMore: 'VRAM bandwidth is in GB/s. Higher is better for texture-heavy games. Integrated GPUs don\'t have dedicated VRAM, they use system RAM, which is slower and shared with the CPU.',
+      },
+      {
+        id: 'problems',
+        title: 'Common Problems',
+        content: 'Out of VRAM: game needs more than the GPU has. Fix: lower texture quality, resolution, or anti-aliasing. Artifacts from bad VRAM: defective memory. Fix: underclock VRAM; improve cooling; RMA if defective. 8GB is usually enough for 1080p; 12GB+ safer for 1440p and 4K.',
+        learnMore: 'Modded games with HD texture packs can use 12–16GB. Check game requirements. Some games show VRAM usage in settings.',
+      },
+    ],
+    commonProblems: [
+      { issue: 'Out of VRAM', fix: 'Lower texture quality, resolution' },
+      { issue: 'Artifacts from bad VRAM', fix: 'Underclock; improve cooling; RMA' },
+    ],
+    symptomsWhenFails: ['Game stutters', 'Colored blocks', 'Driver crash under load'],
+    beginnerMistakes: ['Assuming 24GB for 1080p', 'Ignoring VRAM when buying used', 'Mixing VRAM and system RAM'],
+  },
+  psu: {
+    id: 'psu',
+    name: 'Power Supply',
+    subtitle: 'PSU',
+    description: 'The PSU converts wall power into the voltages your PC needs. Every part gets power from it. A bad or undersized PSU can cause shutdowns or damage.',
+    sections: [
+      {
+        id: 'overview',
+        title: 'What It Is & How It Works',
+        content: 'The PSU converts AC from the wall to DC (+3.3V, +5V, +12V). The 24-pin connector powers the motherboard. The 8-pin CPU power goes near the socket. The GPU gets 6+2 or 8-pin cables. Storage gets SATA power. Wattage must be enough for your CPU and GPU under load, plus headroom. Use PCPartPicker\'s calculator; add 20% headroom.',
+        learnMore: '80+ Bronze, Gold, Platinum are efficiency ratings, higher means less wasted power. Modular PSUs have removable cables; semi-modular has some fixed. Never mix modular cables between PSUs, pinouts differ and can fry components.',
+      },
+      {
+        id: 'problems',
+        title: 'Common Problems',
+        content: 'Insufficient wattage: GPU and CPU exceed capacity. Fix: use calculator; add headroom. Dead PSU: surge, age, low quality. Fix: paperclip test; replace. Intermittent power: loose cables, failing unit. Fix: reseat all cables; RMA if needed. Never use modular cables from another PSU,can damage drives or GPU.',
+        learnMore: 'Paperclip test: short green to black on 24-pin; fan spins = PSU works. Doesn\'t prove it\'s good under load. Cheap PSUs can have poor ripple and lack protections,can damage other parts.',
+        mistakeWarning: '⚠️ Never use modular PSU cables from a different brand/model. Pinouts differ,wrong cables can send wrong voltages and fry your GPU or drives.',
+      },
+    ],
+    commonProblems: [
+      { issue: 'Insufficient wattage', fix: 'Use calculator; add headroom' },
+      { issue: 'Dead PSU', fix: 'Paperclip test; replace' },
+      { issue: 'Intermittent power', fix: 'Reseat cables; RMA' },
+    ],
+    symptomsWhenFails: ['Nothing powers on', 'Random shutdowns', 'PC won\'t stay on'],
+    beginnerMistakes: ['Cheaping out on PSU', 'Mixing modular cables', 'Daisy-chain for high-end GPU'],
+  },
+  storage: {
+    id: 'storage',
+    name: 'Storage',
+    subtitle: 'SSD / HDD / NVMe',
+    description: 'Storage holds your files permanently,OS, games, documents. Unlike RAM, it keeps data when power is off.',
+    sections: [
+      {
+        id: 'overview',
+        title: 'What It Is & How It Works',
+        content: 'Storage is nonvolatile,data stays when power is off. HDDs use spinning platters; slow but cheap. SATA SSDs use a cable; fast, no moving parts. NVMe SSDs plug into M.2 and use PCIe; fastest. Your OS and games should be on an SSD. NVMe is best for new builds when the board supports it.',
+        learnMore: 'NVMe uses PCIe lanes (often 4x). SATA is capped at ~550 MB/s. Sequential read/write speeds matter for large files; random I/O matters for OS and games. HDD is for mass storage when speed doesn\'t matter.',
+      },
+      {
+        id: 'nvme-sata',
+        title: 'NVMe vs SATA',
+        content: 'NVMe plugs into M.2 and is much faster than SATA. SATA uses a cable and works with any board. Both are SSDs,no spinning parts. For OS and games, NVMe is the best choice. HDD is for photos, videos, backups when you need lots of space cheaply.',
+        learnMore: 'Gen3 NVMe: ~3500 MB/s. Gen4: ~7000 MB/s. Gen5 is newer. Real world load times show less difference than benchmarks. Gen3 is often plenty for gaming. Check your motherboard supports the interface.',
+      },
+      {
+        id: 'problems',
+        title: 'Common Problems',
+        content: 'Not detected: not seated, wrong slot, disabled in BIOS. Fix: reseat; check BIOS; try different slot. M.2 drives must be fully inserted at 30° then pressed down and screwed. Slow/corrupt: failing drive, bad cable. Fix: SMART check; replace cable. Boot order wrong: BIOS looks at wrong drive first. Fix: set boot order in BIOS.',
+        learnMore: 'CrystalDiskInfo checks SMART data. Reallocated sectors or high pending count = drive failing. Backup and replace. SATA data and power cables can come loose,reseat both.',
+      },
+    ],
+    commonProblems: [
+      { issue: 'Not detected', fix: 'Reseat; check BIOS; try different slot' },
+      { issue: 'Slow/corrupt', fix: 'SMART check; replace cable' },
+    ],
+    symptomsWhenFails: ['No boot device', 'Slow load times', 'Files corrupt', 'Drive disappears'],
+    beginnerMistakes: ['Forgetting boot order', 'No backup', 'Assuming no boot = dead drive'],
+  },
+  cooling: {
+    id: 'cooling',
+    name: 'Cooling',
+    subtitle: 'Fans + CPU Cooler',
+    description: 'Cooling keeps the CPU and other parts from overheating. Too much heat causes throttling or shutdowns.',
+    sections: [
+      {
+        id: 'overview',
+        title: 'What It Is & How It Works',
+        content: 'The CPU cooler sits on the CPU with thermal paste between them. Heat sinks conduct heat; fans move air. Case fans create airflow,intake at front, exhaust at back/top. Air coolers use heatsinks and fans; liquid coolers use a pump and radiator. Good cooling is essential for stability and longevity. Remove plastic from the cooler before installing.',
+        learnMore: 'Thermal paste fills microscopic gaps. Pea-sized or small spread is enough. Too much paste can insulate. Positive pressure (more intake than exhaust) reduces dust. Negative pressure pulls dust in through gaps.',
+        mistakeWarning: '⚠️ Remove the plastic film from the cooler cold plate before installing. Leaving it on is a very common mistake,your CPU will overheat.',
+      },
+      {
+        id: 'problems',
+        title: 'Common Problems',
+        content: 'Insufficient cooling: cheap cooler, bad paste, blocked vents. Fix: upgrade cooler; repaste; improve airflow. Fan failure: bearing wear, dust. Fix: replace fan; clean regularly. Forgetting to remove plastic: CPU overheats. Fix: remove before install. All exhaust, no intake: negative pressure, dust, poor cooling. Fix: add intake fans.',
+        learnMore: 'CPUs throttle around 90–100°C. Use HWiNFO to monitor. Good case airflow matters as much as the cooler. Mesh front panels beat solid panels.',
+      },
+    ],
+    commonProblems: [
+      { issue: 'Insufficient cooling', fix: 'Upgrade cooler; repaste; improve airflow' },
+      { issue: 'Fan failure', fix: 'Replace fan; clean regularly' },
+    ],
+    symptomsWhenFails: ['Thermal throttling', 'Random shutdowns', 'Loud fans', 'High temps'],
+    beginnerMistakes: ['Forgetting to remove plastic', 'Too little or too much paste', 'Case with no airflow'],
+  },
+  case: {
+    id: 'case',
+    name: 'Case',
+    subtitle: 'Chassis',
+    description: 'The case holds everything. It provides structure, protection, and airflow.',
+    sections: [
+      {
+        id: 'overview',
+        title: 'What It Is & How It Works',
+        content: 'The case is the box that holds all components. It must fit your motherboard (ATX, mATX, ITX), GPU length, and CPU cooler height. Fan mounts and airflow design matter,mesh fronts and well-placed fans keep things cool. Cable management affects airflow and aesthetics. Dust filters help reduce buildup.',
+        learnMore: 'Form factor must match motherboard. ATX cases fit ATX, mATX, and ITX. Check GPU clearance in mm. Check cooler height. Solid front panels look sleek but can choke airflow.',
+      },
+      {
+        id: 'problems',
+        title: 'Common Problems',
+        content: 'GPU doesn\'t fit: case too small. Fix: check GPU length vs case specs before buying. Poor airflow: blocked vents, no intake. Fix: add fans; improve layout. Wrong form factor: ATX board in ITX case. Fix: match form factors. Ignoring clearance: cooler or GPU too tall/long. Fix: check specs.',
+        learnMore: 'Case dimensions are in specs. GPU length, cooler height, PSU length,all matter. Some cases have removable drive cages for long GPUs.',
+      },
+    ],
+    commonProblems: [
+      { issue: 'GPU doesn\'t fit', fix: 'Check GPU length vs case specs' },
+      { issue: 'Poor airflow', fix: 'Add fans; improve layout' },
+    ],
+    symptomsWhenFails: ['Overheating', 'Parts don\'t fit'],
+    beginnerMistakes: ['Ignoring GPU clearance', 'Wrong form factor'],
+  },
+}
+
+export const DEEP_PART_IDS = Object.keys(DEEP_PARTS)
